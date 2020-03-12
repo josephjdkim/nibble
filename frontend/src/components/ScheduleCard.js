@@ -1,14 +1,12 @@
 import React from 'react';
 
-function ScheduleCard({name = "Hooks"}) {
-  const handleClick = () => {
-    console.log("helloooooo")
-  }
-  
-  return <div> 
-      Hello {name} 
-      <button onClick={handleClick}>Click me! </button>
+function ScheduleCard({event}) {
+
+  return (
+    <div> 
+      {`${event.summary} (${event.start.dateTime})`}
     </div>
+  )
 }
 
 export default ScheduleCard;
