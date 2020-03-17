@@ -11,7 +11,10 @@ const pool = new Pool({
 })
 
 const getTasks = (request, response) => {
-  pool.query('SELECT * FROM tasks ORDER BY id ASC', (error, results) => {
+  const user_id = request.params.user_id
+  console.log(`SELECT * FROM tasks WHERE user_id = ${user_id} ORDER BY id ASC`);
+
+  pool.query('SELECT * FROM tasks WHERE user_id = $1 ORDER BY id ASC', [user_id], (error, results) => {
     if (error) {
       throw error
     }
@@ -31,9 +34,8 @@ const getTaskById = (request, response) => {
 }
 
 const createTask = (request, response) => {
-  console.log(request);
-  const { title, estimatedTime, category } = request.body
-  pool.query('INSERT INTO tasks (title, estimated_time, category) VALUES ($1, $2, $3)', [title, estimatedTime, category], (error, results) => {
+  const { title, estimatedTime, category, userID } = request.body
+  pool.query('INSERT INTO tasks (title, estimated_time, category, user_id) VALUES ($1, $2, $3, $4)', [title, estimatedTime, category, userID], (error, results) => {
     if (error) {
       throw error
     }

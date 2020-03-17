@@ -19,7 +19,7 @@ app.use(
 
 app.get("/", (req, res) => res.send('hello'))
 
-app.get('/getTasks', db.getTasks)
+app.get('/getTasks/:user_id', db.getTasks)
 app.get('/tasks/:id', db.getTaskById)
 app.post('/createTask', db.createTask)
 // app.put('/users/:id', db.updateUser)
