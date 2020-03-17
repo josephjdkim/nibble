@@ -4,7 +4,7 @@ function HeaderText({title = "Header"}) {
   
   return (
     <div> 
-      <h2 className="text-4xl mb-2">{title}</h2>
+      <h2 className="text-4xl mb-2 mr-2">{title}</h2>
     </div>
   )
 }

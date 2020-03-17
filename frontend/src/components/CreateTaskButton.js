@@ -35,11 +35,6 @@ function CreateTaskButton({updateTasks}){
     setIsOpen(true);
   }
  
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    subtitle.style.color = '#f00';
-  }
- 
   function closeModal(){
     setIsOpen(false);
   }
@@ -96,28 +91,37 @@ function CreateTaskButton({updateTasks}){
  
   return (
     <div>
-      <button onClick={openModal}>+</button>
+      <button className="bg-yellow-500 hover:bg-yellow-600 text-white w-6 h-6 rounded-full text-xl leading-5 flex items-center justify-center" onClick={openModal}>+</button>
       <Modal
         isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Example Modal"
       >
-
-        <h2 ref={_subtitle => (subtitle = _subtitle)}>Hello</h2>
-        <button onClick={closeModal}>close</button>
-        <div>Create Task</div>
+        {/* <button onClick={closeModal}>close</button> */}
+        <div className="block uppercase tracking-wide text-gray-900 text-xl font-bold mb-2">Create Task</div>
         <form onSubmit={handleSubmit}>
-          <label>
-            Task Name:
-            <input type="text" name="title"onChange={handleInputChange} /><br/>
-            Estimated Time:
-            <input type="text" name="estimatedTime" onChange={handleInputChange}/><br/>
-            Category:
-            <input type="text" name="category" onChange={handleInputChange}/><br/>
-          </label>
-          <input type="submit" value="Submit" onChange={handleInputChange}/>
+          <div className="flex flex-wrap -mx-3 mb-6">
+            <div className="w-full px-3 mb-6 md:mb-0">
+              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                Task Name
+              </label>
+              <input name="title" onChange={handleInputChange} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-first-name" type="text" />
+            </div>
+            <div className="w-3/4 px-3 mb-6 md:mb-0">
+              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                Category
+              </label>
+              <input name="category" onChange={handleInputChange} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-first-name" type="text" />
+            </div>
+            <div className="w-1/4 px-3 mb-6 md:mb-0">
+              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                Estimated Time
+              </label>
+              <input name="estimatedTime" onChange={handleInputChange} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-first-name" type="text" />
+            </div>
+          </div>
+          <input type="submit" value="Submit" onChange={handleInputChange} className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded"/>
         </form>
       </Modal>
     </div>

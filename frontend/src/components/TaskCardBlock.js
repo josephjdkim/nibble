@@ -77,12 +77,12 @@ function TaskCardBlock() {
 
   return (
     <div className="container w-3/5">
-      <div className="container flex">
+      <div className="container flex items-center">
         <HeaderText title="Tasks"/>
         <CreateTaskButton updateTasks={initClient}/>
       </div>
       {state.loaded ? state.data.map(cur => {
-        return <TaskCard task={cur}/>
+        return <TaskCard key={cur.id} task={cur}/>
       }) : null}
     </div>
   );

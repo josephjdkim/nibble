@@ -139,7 +139,7 @@ function ScheduleCardBlock() {
       <button onClick={handleAuthClick}>Authorize</button>
       <button onClick={handleSignoutClick}>Sign Out</button>
       {state.loaded ? state.data.result.items.map(cur => {
-        return <ScheduleCard event={cur}/>
+        return <ScheduleCard key={cur.id} event={cur}/>
       }) : null}
       <pre id="content" style={{whiteSpace: 'pre-wrap'}}></pre>
     </div>
