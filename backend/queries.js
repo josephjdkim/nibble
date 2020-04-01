@@ -1,6 +1,6 @@
 const Pool = require('pg').Pool
 var env = process.env.NODE_ENV || 'development';
-var config = require('./config')[env];
+var config = require('../config')[env];
 
 const pool = new Pool({
   user: config.database.user,
