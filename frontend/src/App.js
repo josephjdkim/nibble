@@ -1,7 +1,7 @@
 import React, { useReducer, useEffect, Fragment } from 'react';
 import ScheduleCardBlock from './components/ScheduleCardBlock';
 import TaskCardBlock from './components/TaskCardBlock';
-import config from './apiGoogleconfig.json';
+import config from './apiGoogleConfig.json';
 import './App.css';
 import './tailwind.css'
 
@@ -59,8 +59,8 @@ function App() {
   }, [])
 
   return (
-    <div className="container m-auto">
-      <img src="logo on white.svg" className="w-1/5 my-4"/>
+    <div className="container m-auto App w-full">
+      <img src="logo on white.svg" className="w-1/5 mb-4"/>
       <div className="flex justify-between">
         {state.loaded ? 
         <Fragment>
