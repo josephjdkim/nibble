@@ -54,9 +54,11 @@ function TaskCardBlock() {
         <HeaderText title="Tasks"/>
         <CreateTaskButton updateTasks={loadTasks}/>
       </div>
-      {state.loaded ? state.data.map(cur => {
-        return <TaskCard key={cur.id} task={cur}/>
-      }) : null}
+      <div className="shadow-inner p-4 rounded-md">
+        {state.loaded ? state.data.map(cur => {
+          return <TaskCard key={cur.id} task={cur}/>
+        }) : null}
+      </div>
     </div>
   );
 }

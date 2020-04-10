@@ -31,9 +31,8 @@ function ScheduleCardBlock() {
    *  Sign in the user upon button click.
    */
   function handleAuthClick(event) {
-    listUpcomingEvents()
-    // console.log(window.gapi.auth2.getAuthInstance());
-    // window.gapi.auth2.getAuthInstance().signIn();
+    console.log(window.gapi.auth2.getAuthInstance());
+    window.gapi.auth2.getAuthInstance().signIn();
   }
 
   /**
@@ -87,14 +86,15 @@ function ScheduleCardBlock() {
 
   // const { error, data } = state
   return (
-    <div className="container w-2/5">
+    <div className="container w-1/3">
       <HeaderText title="Schedule"/>
       <button onClick={handleAuthClick}>Authorize</button>
       <button onClick={handleSignoutClick}>Sign Out</button>
-      {state.loaded ? state.data.result.items.map(cur => {
-        return <ScheduleCard key={cur.id} event={cur}/>
-      }) : null}
-      <pre id="content" style={{whiteSpace: 'pre-wrap'}}></pre>
+      <div className="shadow-inner p-4 rounded-md overflow-y-scroll" style={{height: "550px"}}>
+        {state.loaded ? state.data.result.items.map(cur => {
+          return <ScheduleCard key={cur.id} event={cur}/>
+        }) : null}
+      </div>
     </div>
   );
 }

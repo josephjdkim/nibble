@@ -61,7 +61,7 @@ function App() {
   return (
     <div className="container m-auto">
       <img src="logo on white.svg" className="w-1/5 my-4"/>
-      <div className="flex">
+      <div className="flex justify-between">
         {state.loaded ? 
         <Fragment>
           <ScheduleCardBlock />
