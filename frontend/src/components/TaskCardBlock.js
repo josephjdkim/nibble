@@ -17,34 +17,38 @@ function TaskCardBlock() {
   const [state, setState] = useReducer(reducer, initialState);
 
   async function loadTasks() {
-    const userID = window.gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getId().toString();
-    console.log(`${apiServer}getTasks/${userID}`)
-    const response = await axios.get(`${apiServer}getTasks/${userID}`)
-    const { data, status } = {
-      data: response.data,
-      status: response.status
-    }
-    
-    // error? 
-    if (status !== 200) {
-      return setState({
+    if (window.gapi.auth2.getAuthInstance().isSignedIn.get()) {
+      const userID = window.gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getId().toString();
+      console.log(`${apiServer}getTasks/${userID}`)
+      const response = await axios.get(`${apiServer}getTasks/${userID}`)
+      const { data, status } = {
+        data: response.data,
+        status: response.status
+      }
+      
+      // error? 
+      if (status !== 200) {
+        return setState({
+          data,
+          error: true,
+          loaded: true,
+          fetching: false,
+        })
+      }
+
+      // no error 
+      setState({
         data,
-        error: true,
+        error: null,
         loaded: true,
         fetching: false,
       })
     }
-
-    // no error 
-    setState({
-      data,
-      error: null,
-      loaded: true,
-      fetching: false,
-    })
   }
 
   useEffect(() => {
+    window.gapi.auth2.getAuthInstance().isSignedIn.listen(loadTasks);
+    // Handle the initial sign-in state.
     loadTasks();
   }, [])
 
