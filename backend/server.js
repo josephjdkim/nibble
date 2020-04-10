@@ -25,4 +25,5 @@ app.post('/createTask', db.createTask)
 // app.put('/users/:id', db.updateUser)
 // app.delete('/users/:id', db.deleteUser)
 
-app.listen(PORT)
+console.log("\x1b[36m%s\x1b[0m", `Hosting on PORT=${PORT}`);
+app.listen(PORT);

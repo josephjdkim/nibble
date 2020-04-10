@@ -1,3 +1,6 @@
 backend/node_modules
 .DS_Store
 config.js
+config
+connectdb
+NibbleB02.zip
