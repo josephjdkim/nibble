@@ -57,7 +57,7 @@ function CreateTaskButton({updateTasks}){
  
   return (
     <div>
-      <button className="bg-yellow-500 hover:bg-yellow-600 text-white w-6 h-6 rounded-full text-xl leading-5 flex items-center justify-center" onClick={openModal}>+</button>
+      <button className="text-yellow-500 hover:text-yellow-600 font-bold text-4xl leading-5" onClick={openModal}>+</button>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}

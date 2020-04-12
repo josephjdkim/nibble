@@ -1,6 +1,8 @@
-import React, { useReducer, useEffect, Fragment } from 'react';
+import React, { useReducer, useEffect } from 'react';
+import Header from './components/Header';
 import ScheduleCardBlock from './components/ScheduleCardBlock';
 import TaskCardBlock from './components/TaskCardBlock';
+import NotesBlock from './components/NotesBlock';
 import config from './apiGoogleConfig.json';
 import './App.css';
 import './tailwind.css'
@@ -43,12 +45,11 @@ function App() {
       discoveryDocs: DISCOVERY_DOCS,
       scope: SCOPES
     }).then(function () {
-      return setState({
+      setState({
         error: true,
         loaded: true,
         fetching: false,
       })
-      console.log("worked")
     }, function(error) {
       console.log(error);
     });
@@ -60,15 +61,16 @@ function App() {
 
   return (
     <div className="container m-auto App w-full">
-      <img src="logo on white.svg" className="w-1/5 mb-4"/>
-      <div className="flex justify-between">
-        {state.loaded ? 
-        <Fragment>
+      {state.loaded ?
+      <>
+        <Header />
+        <div className="flex justify-between">
           <ScheduleCardBlock />
-          <TaskCardBlock /> 
-        </Fragment>
-        : null}
-      </div>
+          <TaskCardBlock />
+          <NotesBlock />
+        </div>
+      </>
+      : null}
     </div>
   );
 }

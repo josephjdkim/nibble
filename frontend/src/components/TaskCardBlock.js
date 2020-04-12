@@ -53,12 +53,12 @@ function TaskCardBlock() {
   }, [])
 
   return (
-    <div className="container w-3/5">
-      <div className="container flex items-center">
+    <div className="container w-2/5">
+      <div className="container flex items-center justify-between">
         <HeaderText title="Tasks"/>
         <CreateTaskButton updateTasks={loadTasks}/>
       </div>
-      <div className="shadow-inner p-4 rounded-md">
+      <div className="shadow-inner p-4 rounded-md overflow-y-scroll">
         {state.loaded ? state.data.map(cur => {
           return <TaskCard key={cur.id} task={cur}/>
         }) : null}

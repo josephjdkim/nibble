@@ -28,21 +28,6 @@ function ScheduleCardBlock() {
   }
 
   /**
-   *  Sign in the user upon button click.
-   */
-  function handleAuthClick(event) {
-    console.log(window.gapi.auth2.getAuthInstance());
-    window.gapi.auth2.getAuthInstance().signIn();
-  }
-
-  /**
-   *  Sign out the user upon button click.
-   */
-  function handleSignoutClick(event) {
-    window.gapi.auth2.getAuthInstance().signOut();
-  }
-
-  /**
    * Print the summary and start datetime/date of the next ten events in
    * the authorized user's calendar. If no events are found an
    * appropriate message is printed.
@@ -86,10 +71,8 @@ function ScheduleCardBlock() {
 
   // const { error, data } = state
   return (
-    <div className="container w-1/3">
+    <div className="container w-1/4">
       <HeaderText title="Schedule"/>
-      <button onClick={handleAuthClick}>Authorize</button>
-      <button onClick={handleSignoutClick}>Sign Out</button>
       <div className="shadow-inner p-4 rounded-md overflow-y-scroll" style={{height: "550px"}}>
         {state.loaded ? state.data.result.items.map(cur => {
           return <ScheduleCard key={cur.id} event={cur}/>
