@@ -10,6 +10,8 @@ const pool = new Pool({
   port: config.database.port
 })
 
+const crypto = requre('crypto');
+
 const getTasks = (request, response) => {
   const user_id = request.params.user_id
   console.log(`SELECT * FROM tasks WHERE user_id = ${user_id} ORDER BY id ASC`);
@@ -43,6 +45,21 @@ const createTask = (request, response) => {
   })
 }
 
+const createUser = (request, response) = {
+  const { userID, first_name, last_name, email, username, pw } = request.body
+  pwHashed = crypto.createHash('sha256').update(pw+config.secret.salt).digest('hex');
+  console.log(pwHashed)
+  pool.query(
+    'INSERT INTO nibble_users (user_id, first_name, last_name, email, username, password) VALUES ($1, $2, $3, $4, $5, $6',
+     [userID, first_name, last_name, email, username, pwHashed],
+     (error, results) => {
+      if (error) {
+        throw error
+      }
+      response.status(201).send(`Successfully created user ${username}. Welcome, ${first_name}!`)
+     })
+}
+
 // const updateUser = (request, response) => {
 //   const id = parseInt(request.params.id)
 //   const { name, email } = request.body
@@ -59,16 +76,17 @@ const createTask = (request, response) => {
 //   )
 // }
 
-// const deleteUser = (request, response) => {
-//   const id = parseInt(request.params.id)
+const deleteUser = (request, response) => {
+  const user_id = parseInt(request.params.user_id)
 
-//   pool.query('DELETE FROM users WHERE id = $1', [id], (error, results) => {
-//     if (error) {
-//       throw error
-//     }
-//     response.status(200).send(`User deleted with ID: ${id}`)
-//   })
-// }
+  pool.query('DELETE FROM nibble_users WHERE user_id = $1', [id], (error, results) => {
+    if (error) {
+      throw error
+    }
+    console.log(`User with ID: ${user_id} was deleted`);
+    response.status(200).send(`User deleted with ID: ${id}`)
+  })
+}
 
 module.exports = {
   getTasks,
