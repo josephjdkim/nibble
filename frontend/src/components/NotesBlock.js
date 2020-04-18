@@ -2,6 +2,8 @@ import React, { useReducer, useEffect } from 'react';
 import HeaderText from "./HeaderText";
 import axios from 'axios';
 
+import './NotesBlock.css';
+
 function NotesBlock() {
   const apiServer = 'http://localhost:5001/';
 
@@ -51,7 +53,7 @@ function NotesBlock() {
   // }, [])
 
   return (
-    <div className="container w-1/3">
+    <div className="container w-1/3 notesTheme">
       <div className="container flex items-center">
         <HeaderText title="Notes"/>
       </div>

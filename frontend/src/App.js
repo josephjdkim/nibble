@@ -60,11 +60,11 @@ function App() {
   }, [])
 
   return (
-    <div className="container m-auto App w-full">
+    <div className="container App w-full nibbleTheme">
       {state.loaded ?
       <>
         <Header />
-        <div className="flex justify-between">
+        <div className="flex justify-between w-full">
           <ScheduleCardBlock />
           <TaskCardBlock />
           <NotesBlock />

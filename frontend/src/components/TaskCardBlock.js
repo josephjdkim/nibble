@@ -4,6 +4,8 @@ import HeaderText from './HeaderText';
 import CreateTaskButton from './CreateTaskButton';
 import axios from 'axios';
 
+import './TaskCardBlock.css';
+
 function TaskCardBlock() {
   const apiServer = 'http://localhost:5001/';
 
@@ -53,7 +55,7 @@ function TaskCardBlock() {
   }, [])
 
   return (
-    <div className="container w-2/5">
+    <div className="container w-2/5 taskTheme">
       <div className="container flex items-center justify-between">
         <HeaderText title="Tasks"/>
         <CreateTaskButton updateTasks={loadTasks}/>

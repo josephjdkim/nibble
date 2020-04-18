@@ -2,6 +2,8 @@ import React, { useReducer, useEffect } from 'react';
 import ScheduleCard from './ScheduleCard';
 import HeaderText from './HeaderText';
 
+import './ScheduleCardBlock.css';
+
 function ScheduleCardBlock() {
   const initialState = {
     data: null,
@@ -71,9 +73,9 @@ function ScheduleCardBlock() {
 
   // const { error, data } = state
   return (
-    <div className="container w-1/4">
+    <div className="container w-1/3 schedTheme">
       <HeaderText title="Schedule"/>
-      <div className="shadow-inner p-4 rounded-md overflow-y-scroll" style={{height: "550px"}}>
+      <div className="shadow-inner p-4 rounded-md overflow-y-scroll schedBody" style={{height: "550px"}}>
         {state.loaded ? state.data.result.items.map(cur => {
           return <ScheduleCard key={cur.id} event={cur}/>
         }) : null}

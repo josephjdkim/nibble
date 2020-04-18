@@ -10,7 +10,7 @@ const pool = new Pool({
   port: config.database.port
 })
 
-const crypto = requre('crypto');
+const crypto = require('crypto');
 
 const getTasks = (request, response) => {
   const user_id = request.params.user_id
@@ -45,7 +45,7 @@ const createTask = (request, response) => {
   })
 }
 
-const createUser = (request, response) = {
+const createUser = (request, response) => {
   const { userID, first_name, last_name, email, username, pw } = request.body
   pwHashed = crypto.createHash('sha256').update(pw+config.secret.salt).digest('hex');
   console.log(pwHashed)

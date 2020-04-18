@@ -1,0 +1,9 @@
+create table nibble_users(
+	user_id varchar (100) primary key,
+	username varchar (50) unique not null,
+	password varchar (50) not null,
+	first_name varchar (50) not null,
+	last_name varchar (50) not null,
+	email varchar (355),
+	date_created TIMESTAMP default now()
+	);

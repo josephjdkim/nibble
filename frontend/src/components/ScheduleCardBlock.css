@@ -1,0 +1,13 @@
+.schedTheme {
+	background: #DFF4FF;
+  padding: 15px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 40px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.schedBody {
+  z-index: 999;
+  background: #FFFEFA;
+}
