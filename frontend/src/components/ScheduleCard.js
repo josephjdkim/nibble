@@ -3,7 +3,7 @@ import React from 'react';
 function ScheduleCard({event}) {
 
   let eventDate = new Date(event.start.dateTime);
-  eventDate = `${eventDate.getMonth()}/${eventDate.getDate()}/${eventDate.getFullYear()} ${eventDate.getHours()}:${eventDate.getMinutes()}`;
+  eventDate = `${eventDate.getMonth()+1}/${eventDate.getDate()}/${eventDate.getFullYear()} ${eventDate.getHours()}:${eventDate.getMinutes()}`;
 
   return (
     <div className="max-w-sm w-full bg-white lg:max-w-full mb-4">

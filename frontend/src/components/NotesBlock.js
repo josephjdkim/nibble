@@ -9,7 +9,6 @@ function NotesBlock() {
   const [payload, setPayload] = useState({});
 
   async function onInputChange(event) {
-    console.log(payload);
     const userID = window.gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getId();
     setState({
       data: event.target.value
@@ -17,7 +16,6 @@ function NotesBlock() {
     payload['userID'] = userID;
     payload['note'] = event.target.value;
     setPayload(payload);
-    console.log(payload);
     await axios.put(`${apiServer}updateNotes/${userID}`, JSON.stringify(payload), {
       headers: {
         'Content-Type': 'application/json',
@@ -75,6 +73,7 @@ function NotesBlock() {
       {state.loaded ?
       <textarea 
         className="shadow-inner p-4 rounded-md w-full h-full" 
+        style={{height: "74vh"}}
         placeholder="Write some notes..." 
         value={state.data[0].content}
         onChange={onInputChange}

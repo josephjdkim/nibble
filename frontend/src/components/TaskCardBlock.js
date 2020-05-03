@@ -60,7 +60,7 @@ function TaskCardBlock() {
         <HeaderText title="Tasks"/>
         <CreateTaskButton updateTasks={loadTasks}/>
       </div>
-      <div className="shadow-inner p-4 rounded-md overflow-y-scroll">
+      <div className="shadow-inner p-4 rounded-md overflow-y-scroll" style={{height: "76vh"}}>
         {state.loaded ? state.data.map(cur => {
           return <TaskCard key={cur.id} task={cur}/>
         }) : null}

@@ -12,8 +12,8 @@ function Header() {
   }
 
   return (
-    <div className="flex justify-between items-center">
-      <img src="logo on white.svg" className="w-1/5 mb-4"/>
+    <div className="flex justify-between items-center px-5">
+      <img src="logo on white.svg" className="h-20 mb-4"/>
       <div className="flex">
         {window.gapi.auth2.getAuthInstance().isSignedIn.get() ?
           <button onClick={handleSignoutClick}>Sign Out</button> :

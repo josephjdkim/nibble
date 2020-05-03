@@ -60,7 +60,7 @@ function App() {
   }, [])
 
   return (
-    <div className="container App w-full nibbleTheme">
+    <div className="App w-full nibbleTheme">
       {state.loaded ?
       <>
         <Header />
