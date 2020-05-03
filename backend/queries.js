@@ -60,21 +60,16 @@ const createUser = (request, response) => {
      })
 }
 
-// const updateUser = (request, response) => {
-//   const id = parseInt(request.params.id)
-//   const { name, email } = request.body
+const getNotes = (request, response) => {
+  const user_id = request.params.user_id
 
-//   pool.query(
-//     'UPDATE users SET name = $1, email = $2 WHERE id = $3',
-//     [name, email, id],
-//     (error, results) => {
-//       if (error) {
-//         throw error
-//       }
-//       response.status(200).send(`User modified with ID: ${id}`)
-//     }
-//   )
-// }
+  pool.query('SELECT * FROM notes WHERE user_id = $1', [user_id], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
 
 const deleteUser = (request, response) => {
   const user_id = parseInt(request.params.user_id)
@@ -88,8 +83,26 @@ const deleteUser = (request, response) => {
   })
 }
 
+const updateNotes = (request, response) => {
+  const { userID, note } = request.body
+
+  // INSERT INTO distributors (did, dname)
+  // VALUES (5, 'Gizmo Transglobal'), (6, 'Associated Computing, Inc')
+  // ON CONFLICT (did) DO UPDATE SET dname = EXCLUDED.dname;
+  const query = `INSERT INTO notes (user_id, content) VALUES ($1, '') ON CONFLICT (user_id) DO UPDATE SET content = $2`
+
+  pool.query(query, [userID, note], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).send(`User modified with ID: ${userID}`)
+  })
+}
+
 module.exports = {
   getTasks,
   getTaskById,
-  createTask
+  createTask,
+  getNotes,
+  updateNotes
 }
