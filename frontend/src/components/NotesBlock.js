@@ -75,7 +75,7 @@ function NotesBlock() {
         className="shadow-inner p-4 rounded-md w-full h-full" 
         style={{height: "74vh"}}
         placeholder="Write some notes..." 
-        value={state.data[0].content}
+        value={state.data.content}
         onChange={onInputChange}
       /> : null}
     </div>
