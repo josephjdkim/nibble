@@ -1,6 +1,7 @@
 const Pool = require('pg').Pool;
 const env = process.env.NODE_ENV || 'development';
-const config;
+let config = null;
+
 if (process.env.NODE_ENV !== 'production') {
   config = require('../config')[env];
 }
