@@ -93,7 +93,7 @@ function TaskCard({task, updateTasks}) {
           <div className="text-gray-700 text-base w-4/12">{`${task.category}`}</div>
           <div className=" text-sm text-gray-900 leading-none w-4/12">
             {task.time_started ? `${timeElapsed.format("HH:mm:ss")} / `: null} 
-            {moment.utc().hours(Math.floor(task.estimated_time/60)).minutes(Math.floor(task.estimated_time%60)).seconds(0).format("hh:mm:ss")}
+            {moment.utc().hours(Math.floor(task.estimated_time/60)).minutes(Math.floor(task.estimated_time%60)).seconds(0).format("HH:mm:ss")}
             </div>
         </div>
       </div>
