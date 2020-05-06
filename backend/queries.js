@@ -47,21 +47,25 @@ const createTask = (request, response) => {
 }
 
 const deleteTask = (request, response) => {
-  const { id, title } = request.body;
-  const user_id = request.params.user_id;
-  pool.query('DELETE FROM tasks WHERE user_id=$1 and id=$2', [userID, id], (error, results) => {
-    if (error) {
-      throw error
-    }
-    response.status(200).send(`Removed task ${title} with id ${id}`)
+  const { id, title, category } = request.body;
+  const userID = request.params.user_id;
+  console.log(`Deleting task from user ${userID}`)
+  pool.query('DELETE FROM tasks WHERE user_id=$1 and id=$2 and title=$3 and category=$4',
+    [userID, id, title, category], (error, results) => {
+      if (error) {
+        throw error
+      }
+      response.status(200).send(`Removed task ${title} with id ${id}`)
   })
 }
 
 const updateTask = (request, response) => {
-  const { title, estimated_time, category, userID, id} = request.body;
+  const { title, estimated_time, category, id} = request.body;
+  const userID = request.params.user_id;
+  console.log(`Updating user ${userID} who has task ${id}`)
   pool.query(
-    'UPDATE tasks SET title=$1, estimated_time=$2, category=$3 WHERE user_id=$4', 
-    [title, estimated_time, category, userID],
+    'UPDATE tasks SET title=$1, estimated_time=$2, category=$3 WHERE user_id=$4 and id=$5', 
+    [title, estimated_time, category, userID, id],
     (error, results) => {
       if (error)
         throw error
