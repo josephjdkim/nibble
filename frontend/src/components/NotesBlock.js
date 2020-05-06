@@ -70,14 +70,16 @@ function NotesBlock() {
       <div className="container flex items-center">
         <HeaderText title="Notes"/>
       </div>
-      {state.loaded ?
-      <textarea 
+      <div className="p-6 rounded-md overflow-y-scroll schedBody" style={{height: "76vh"}}>
+        {state.loaded ?
+        <textarea 
         className="shadow-inner p-4 rounded-md w-full h-full" 
         style={{height: "74vh"}}
         placeholder="Write some notes..." 
         value={state.data.content}
         onChange={onInputChange}
-      /> : null}
+        /> : null}
+      </div>
     </div>
   );
 }
