@@ -1,9 +1,10 @@
 import React from 'react';
+import moment from 'moment';
 
 function ScheduleCard({event}) {
 
-  let eventDate = new Date(event.start.dateTime);
-  eventDate = `${eventDate.getMonth()+1}/${eventDate.getDate()}/${eventDate.getFullYear()} ${eventDate.getHours()}:${eventDate.getMinutes()}`;
+  let eventDate = moment(event.start.dateTime);
+  eventDate = eventDate.format("M/D/YY HH:mm");
 
   return (
     <div className="max-w-sm w-full rounded-lg bg-white lg:max-w-full mb-4 shadow-lg">
