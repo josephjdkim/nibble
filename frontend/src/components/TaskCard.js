@@ -31,7 +31,7 @@ function TaskCard({task, updateTasks}) {
     }
   }, [timeStarted])
 
-  async function handleTaskUpdate(event) {
+  async function handleTask(event) {
     event.preventDefault();
     const route = event.target.name+"Task";
     console.log(route);
@@ -54,8 +54,8 @@ function TaskCard({task, updateTasks}) {
         data: payload
       })
     }
-    updateTasks();
     handleTaskInfo(!showTaskInfo);
+    updateTasks();
   }
 
   async function startTask(event) {
@@ -70,6 +70,7 @@ function TaskCard({task, updateTasks}) {
     })
     setTimeStarted(true);
     updateTasks();
+    handleTaskInfo(!showTaskInfo);
   }
 
   async function endTask(event) {
@@ -83,8 +84,28 @@ function TaskCard({task, updateTasks}) {
       }
     })
     setTimeStarted(false);
+    handleTaskInfo(!showTaskInfo);
     updateTasks();
   }
+
+  // async function handleTaskDelete(event) {
+  //   console.log(payload)
+  //   event.preventDefault();
+  //   const route = event.target.name+"Task";
+  //   console.log(route);
+  //   console.log(payload);
+  //   // newPayload = {...payload}
+  //   payload['userID'] = userID
+  //   setPayload(payload);
+  //   console.log(payload);
+  //   await axios.delete(`${apiServer}deleteTask/${userID}`, JSON.stringify(payload), {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     }
+  //   })
+  //   updateTasks();
+  //   handleTaskInfo(!showTaskInfo);
+  // }
 
   function handleInputChange(event) {
     const target = event.target;
@@ -174,17 +195,17 @@ function TaskCard({task, updateTasks}) {
           <div className="flex justify-between px-6 py-4">
             <input
               name="update"
-              type="submit"
+              type="button"
               value="Update"
               className="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-3 rounded"
-              onClick={handleTaskUpdate}
+              onClick={handleTask}
             />
             <input
               name="delete"
-              type="submit"
+              type="button"
               value="Delete"
               className="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-4 rounded"
-              onClick={handleTaskUpdate}
+              onClick={handleTask}
             />
           </div>
         </div>
