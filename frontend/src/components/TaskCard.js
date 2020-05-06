@@ -31,20 +31,43 @@ function TaskCard({task, updateTasks}) {
     const route = event.target.name+"Task";
     console.log(route);
     console.log(payload);
+    // newPayload = {...payload}
+    payload['userID'] = userID
+    setPayload(payload);
+    console.log(route.slice(0, route.length-4) == "update");
+    if (route.slice(0, route.length-4) == "update") {
+      await axios.put(`${apiServer}${route}/${userID}`, JSON.stringify(payload), {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+    } else if (route.slice(0, route.length-4) == "delete") {
+      await axios.delete(`${apiServer}${route}/${userID}`, JSON.stringify(payload), {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+    }
+    updateTasks();
+  }
+
+  async function handleTaskDelete(event) {
+    console.log(payload)
+    event.preventDefault();
+    const route = event.target.name+"Task";
+    console.log(route);
+    console.log(payload);
+    // newPayload = {...payload}
     payload['userID'] = userID
     setPayload(payload);
     console.log(payload);
-    await axios.post(`${apiServer}${route}`, JSON.stringify(payload), {
+    await axios.delete(`${apiServer}deleteTask/${userID}`, JSON.stringify(payload), {
       headers: {
         'Content-Type': 'application/json',
       }
     })
     updateTasks();
-  }
-
-  async function handleTaskDelete(event) {
-    event.preventDefault();
-    console.log(payload)
+    handleTaskInfo(!showTaskInfo);
   }
 
   function handleInputChange(event) {
@@ -54,12 +77,11 @@ function TaskCard({task, updateTasks}) {
     let newPayload = {...payload}
     newPayload[name] = value;
     setPayload(newPayload);
-    console.log(newPayload);
+    // console.log(newPayload);
   }
 
   return(
     <div className="max-w-sm w-full bg-white lg:max-w-full mb-4">
-      <div>{task.time_started ? timeElapsed.format("HH:mm:ss") : null}</div>
       <div
         className="border border-white rounded-md shadow-lg p-4 flex flex-col justify-between leading-normal"
         onClick={() => handleTaskInfo(!showTaskInfo)}
@@ -68,11 +90,9 @@ function TaskCard({task, updateTasks}) {
           <div className="text-gray-900 font-bold text-xl w-4/12">{`${task.title}`}</div>
           <div className="text-gray-700 text-base w-4/12">{`${task.category}`}</div>
           <div className=" text-sm text-gray-900 leading-none w-4/12">
-            {`
-              ${Math.floor(task.estimated_time/60)} ${Math.floor(task.estimated_time/60) <  2 ? 'hour' : 'hours'}
-              ${Math.floor(task.estimated_time%60)} ${Math.floor(task.estimated_time%60) <  2 ? 'min' : 'mins'} 
-            `}
-          </div>
+            {task.time_started ? `${timeElapsed.format("HH:mm:ss")} / `: null} 
+            {moment.utc().hours(Math.floor(task.estimated_time/60)).minutes(Math.floor(task.estimated_time%60)).seconds(0).format("hh:mm:ss")}
+            </div>
         </div>
       </div>
       {

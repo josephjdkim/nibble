@@ -19,8 +19,8 @@ function App() {
   const reducer = (state, newState) => ({ ...state, ...newState })
   const [state, setState] = useReducer(reducer, initialState);
   
-  const CLIENT_ID = config.clientId;
-  const API_KEY = config.apiKey;
+  const CLIENT_ID = process.env.GOOGLE_API_CLIENT_ID || config.clientId;
+  const API_KEY = process.env.GOOGLE_API_KEY || config.apiKey;
 
   // Array of API discovery doc URLs for APIs used by the quickstart
   const DISCOVERY_DOCS = config.discoveryDocs;
