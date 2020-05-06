@@ -18,8 +18,6 @@ app.use(
   })
 )
 
-app.get("/", (req, res) => res.send('hello'))
-
 app.get('/getTasks/:user_id', db.getTasks);
 app.get('/tasks/:id', db.getTaskById);
 app.post('/createTask', db.createTask);
@@ -33,19 +31,19 @@ app.put('/updateNotes/:user_id', db.updateNotes);
 // app.put('/users/:id', db.updateUser)
 // app.delete('/users/:id', db.deleteUser)
 
-app.use(express.static(path.join(__dirname, './frontend/build')));
+app.use(express.static(path.join(__dirname, './../frontend/build')));
 
 //production mode
 if(process.env.NODE_ENV === 'production') {  
-  app.use(express.static(path.join(__dirname, './frontend/build'))); 
+  app.use(express.static(path.join(__dirname, './../frontend/build'))); 
   app.get('*', (req, res) => {    
-    res.sendfile(path.join(__dirname = './frontend/build/index.html'));  
+    res.sendfile(path.join(__dirname = './../frontend/build/index.html'));  
   })
 }
 
 //build mode
 app.get('*', (req, res) => {  
-  res.sendFile(path.join(__dirname+'./frontend/build/index.html'));
+  res.sendFile(path.join(__dirname+'./../frontend/build/index.html'));
 })
 
 console.log("\x1b[36m%s\x1b[0m", `Hosting on PORT=${PORT}`);
