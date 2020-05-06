@@ -1,4 +1,5 @@
 import React, { useReducer, useEffect } from 'react';
+import Home from './components/Home';
 import Header from './components/Header';
 import ScheduleCardBlock from './components/ScheduleCardBlock';
 import TaskCardBlock from './components/TaskCardBlock';
@@ -61,6 +62,7 @@ function App() {
 
   return (
     <div className="App w-full nibbleTheme">
+      {/* <Home /> */}
       {state.loaded ?
       <>
         <Header />
