@@ -75,15 +75,31 @@ const updateTask = (request, response) => {
 }
 
 const startTask = (request, response) => {
-  const { userID, id} = request.body;
+  const { id } = request.body;
+  const userID = request.params.user_id;
   const time_created = moment().utc().format();
+  console.log(time_created);
   pool.query(
-    'UPDATE tasks SET time_started=$1 WHERE user_id=$4 and id=$5', 
+    'UPDATE tasks SET time_started=$1 WHERE user_id=$2 and id=$3', 
     [time_created, userID, id],
     (error, results) => {
       if (error)
         throw error
       response.status(200).send(`Updated user ${userID} with fields ${{time_created}}`)
+  })
+}
+
+const endTask = (request, response) => {
+  const { id } = request.body;
+  const userID = request.params.user_id;
+  const time_finished = moment().utc().format();
+  pool.query(
+    'UPDATE tasks SET time_finished=$1 WHERE user_id=$2 and id=$3', 
+    [time_finished, userID, id],
+    (error, results) => {
+      if (error)
+        throw error
+      response.status(200).send(`Updated user ${userID} with fields ${{time_finished}}`)
   })
 }
 
@@ -147,6 +163,7 @@ module.exports = {
   createTask,
   updateTask,
   startTask,
+  endTask,
   deleteTask,
   getNotes,
   updateNotes
