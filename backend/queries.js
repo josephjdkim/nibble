@@ -1,6 +1,7 @@
-const Pool = require('pg').Pool
-var env = process.env.NODE_ENV || 'development';
-var config = require('../config')[env];
+const Pool = require('pg').Pool;
+const env = process.env.NODE_ENV || 'development';
+const config = require('../config')[env];
+const moment = require('moment');
 
 const pool = new Pool({
   user: config.database.user,
@@ -37,7 +38,6 @@ const getTaskById = (request, response) => {
 
 const createTask = (request, response) => {
   const { title, estimatedTime, category, userID } = request.body;
-  const user_id = request.params.user_id;
   pool.query('INSERT INTO tasks (title, estimated_time, category, user_id) VALUES ($1, $2, $3, $4)', [title, estimatedTime, category, userID], (error, results) => {
     if (error) {
       throw error
@@ -70,6 +70,19 @@ const updateTask = (request, response) => {
       if (error)
         throw error
       response.status(200).send(`Updated user ${userID} with fields ${{title, estimated_time, category, userID}}`)
+  })
+}
+
+const startTask = (request, response) => {
+  const { userID, id} = request.body;
+  const time_created = moment().utc().format();
+  pool.query(
+    'UPDATE tasks SET time_started=$1 WHERE user_id=$4 and id=$5', 
+    [time_created, userID, id],
+    (error, results) => {
+      if (error)
+        throw error
+      response.status(200).send(`Updated user ${userID} with fields ${{time_created}}`)
   })
 }
 
@@ -132,6 +145,7 @@ module.exports = {
   getTaskById,
   createTask,
   updateTask,
+  startTask,
   deleteTask,
   getNotes,
   updateNotes
