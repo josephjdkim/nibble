@@ -20,10 +20,18 @@ function CreateTaskButton({updateTasks}){
   var subtitle;
   const apiServer = 'http://localhost:5001/'
   const [modalIsOpen,setIsOpen] = useState(false);
-  const [payload, setPayload] = useState({});
+  const initialPayload = {
+    title: '',
+    category: '',
+    estimatedTime: 0
+  }
+  const [payload, setPayload] = useState(initialPayload);
 
-  const showError = false;
-  const errorMsg = '';
+  const [showError, setError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [errorsList, setErrorsList] = useState({})
+  // let showError = false;
+  // let errorMsg = '';
 
   function openModal() {
     setIsOpen(true);
@@ -31,6 +39,27 @@ function CreateTaskButton({updateTasks}){
  
   function closeModal(){
     setIsOpen(false);
+    setError(false);
+    setErrorMsg('');
+  }
+
+  function checkPayload() {
+    const { estimatedTime, title, category} = payload;
+    let errList = {}
+    if (estimatedTime && estimatedTime > 120) {
+      setError(true);
+      // setErrorMsg("That's too much time! Estimated time should be less than 2 hours for best work quality!")
+      errList['estimatedTime'] = "That's too much time! Estimated time should be less than 2 hours for best work quality!"
+    }
+    else if (estimatedTime && estimatedTime == 0) {
+      setError(true);
+      errList['estimatedTime'] = "Please set your estimated time for this task!";
+    }
+    else {
+      setError(false)
+    }
+    console.log(errList);
+    setErrorsList(errList);
   }
 
   async function handleSubmit(event) {
@@ -40,11 +69,12 @@ function CreateTaskButton({updateTasks}){
     payload['userID'] = userID
     setPayload(payload);
     console.log(payload);
-    await axios.post(`${apiServer}createTask`, JSON.stringify(payload), {
-      headers: {
-        'Content-Type': 'application/json',
-      }
-    })
+    if (!showError)
+      await axios.post(`${apiServer}createTask`, JSON.stringify(payload), {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
     closeModal();
     updateTasks();
   }
@@ -55,7 +85,8 @@ function CreateTaskButton({updateTasks}){
     const name = target.name;
     payload[name] = value;
     setPayload(payload);
-    // console.log(payload);
+    console.log(payload);
+    checkPayload();
   }
  
   return (
@@ -67,11 +98,7 @@ function CreateTaskButton({updateTasks}){
         style={customStyles}
         contentLabel="Example Modal" // change name of this?
       >
-        {/* <button onClick={closeModal}>close</button> */}
         <div className="block uppercase tracking-wide text-gray-900 text-xl font-bold mb-2">Create Task</div>
-        { showError &&
-          <div className="taskSubmitError">${errorMsg}</div>
-        }
         <form onSubmit={handleSubmit}>
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full px-3 mb-6 md:mb-0">
@@ -90,10 +117,35 @@ function CreateTaskButton({updateTasks}){
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                 Est. Time (min)
               </label>
-              <input name="estimatedTime" onChange={handleInputChange} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-first-name" type="text" />
+              <input
+                name="estimatedTime"
+                onChange={handleInputChange}
+                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 "
+                id="grid-first-name"
+                type="text"
+                />
             </div>
           </div>
-          <input type="submit" value="Create" onChange={handleInputChange} className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded"/>
+          { 
+            showError &&
+            Object.entries(errorsList).map( ([errors, errMsg]) => {
+              return <div className="bg-red-300 p-4 mb-2">
+                {console.log(errors, errMsg)}
+                {errMsg}
+              </div>
+            })
+          }
+          <input 
+            type="submit"
+            value="Create"
+            onChange={handleInputChange}
+            // className={showError ? 
+            //   "bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded" :
+            //   "bg-yellow-300 text-white font-bold py-2 px-4 rounded"
+            // }
+            className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded"
+            disabled={showError}
+            />
         </form>
 
       </Modal>

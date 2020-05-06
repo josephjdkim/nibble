@@ -94,7 +94,12 @@ function TaskCard({task, updateTasks}) {
           <div className=" text-sm text-gray-900 leading-none w-4/12">
             {task.time_started ? `${timeElapsed.format("HH:mm:ss")} / `: null} 
             {moment.utc().hours(Math.floor(task.estimated_time/60)).minutes(Math.floor(task.estimated_time%60)).seconds(0).format("HH:mm:ss")}
-            </div>
+          </div>
+          <input
+            type="button"
+            value="Start!"
+            className="bg-green-300 hover:bg-green-400 rounded p-2"
+          />
         </div>
       </div>
       {
@@ -144,14 +149,14 @@ function TaskCard({task, updateTasks}) {
           <div className="flex justify-between px-6 py-4">
             <input
               name="update"
-              type="submit"
+              type="button"
               value="Update"
               className="bg-blue-400 hover:bg-blue-500 text-white font-bold py-2 px-3 rounded"
               onClick={handleTask}
             />
             <input
               name="delete"
-              type="submit"
+              type="button"
               value="Delete"
               className="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-4 rounded"
               onClick={handleTask}
