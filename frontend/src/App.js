@@ -1,9 +1,11 @@
 import React, { useReducer, useEffect } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
 import Home from './components/Home';
-import Header from './components/Header';
-import ScheduleCardBlock from './components/ScheduleCardBlock';
-import TaskCardBlock from './components/TaskCardBlock';
-import NotesBlock from './components/NotesBlock';
+import Dashboard from './components/Dashboard';
 import config from './apiGoogleConfig.json';
 import './App.css';
 import './tailwind.css'
@@ -65,12 +67,13 @@ function App() {
       {/* <Home /> */}
       {state.loaded ?
       <>
-        <Header />
-        <div className="flex justify-between w-full">
-          <ScheduleCardBlock />
-          <TaskCardBlock />
-          <NotesBlock />
-        </div>
+        <Router>
+          <Switch>
+            <Route exact path="/" children={<Home />} />
+            <Route exact path="/dashboard" children={<Dashboard />} />
+          </Switch>
+        </Router>
+
       </>
       : null}
     </div>
