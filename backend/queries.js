@@ -7,6 +7,8 @@ if (process.env.NODE_ENV !== 'production') {
 }
 const moment = require('moment');
 
+
+
 const pool = new Pool({
   user: process.env.USER || config.database.user,
   host: process.env.HOST || config.database.host,
@@ -23,6 +25,7 @@ const getTasks = (request, response) => {
 
   pool.query('SELECT * FROM tasks WHERE user_id = $1 ORDER BY id ASC', [user_id], (error, results) => {
     if (error) {
+      console.log(error);
       throw error
     }
     response.status(200).json(results.rows)
