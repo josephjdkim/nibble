@@ -1,7 +1,21 @@
 import React from 'react';
+import { useHistory, Link } from "react-router-dom";
 import './Home.css';
 
 function Home() {
+  const history = useHistory();
+
+  function handleAuthClick(event) {
+    console.log(window.gapi.auth2.getAuthInstance());
+    window.gapi.auth2.getAuthInstance().signIn();
+    history.push("/dashboard")
+  }
+
+  function handleSignoutClick(event) {
+    window.gapi.auth2.getAuthInstance().signOut();
+    window.location.reload();
+  }
+
   return (
     <div>
       <nav>
@@ -10,7 +24,14 @@ function Home() {
             <img src="logo on dark.png" />
           </div>
           <div className="nav-buttons">
-            <button>Log In</button>
+            {window.gapi.auth2.getAuthInstance().isSignedIn.get() ?
+              <>
+                <button><Link to="/dashboard">Dashboard</Link></button>
+                <button onClick={handleSignoutClick}>Sign Out</button> 
+              </>
+              :
+              <button onClick={handleAuthClick}>Sign In</button>
+            }
           </div>
         </div>
       </nav>
