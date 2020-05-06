@@ -42,13 +42,15 @@ function TaskCard({task, updateTasks}) {
         }
       })
     } else if (route.slice(0, route.length-4) == "delete") {
-      await axios.delete(`${apiServer}${route}/${userID}`, JSON.stringify(payload), {
+      await axios.delete(`${apiServer}${route}/${userID}`, {
         headers: {
           'Content-Type': 'application/json',
-        }
+        },
+        data: payload
       })
     }
     updateTasks();
+    handleTaskInfo(!showTaskInfo);
   }
 
   async function handleTaskDelete(event) {
@@ -152,7 +154,7 @@ function TaskCard({task, updateTasks}) {
               type="submit"
               value="Delete"
               className="bg-red-400 hover:bg-red-500 text-white font-bold py-2 px-4 rounded"
-              onClick={handleTaskDelete}
+              onClick={handleTaskUpdate}
             />
           </div>
         </div>

@@ -55,7 +55,7 @@ function CreateTaskButton({updateTasks}){
     const name = target.name;
     payload[name] = value;
     setPayload(payload);
-    console.log(payload);
+    // console.log(payload);
   }
  
   return (
