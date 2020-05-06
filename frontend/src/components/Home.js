@@ -8,7 +8,7 @@ function Home() {
   function handleAuthClick(event) {
     console.log(window.gapi.auth2.getAuthInstance());
     window.gapi.auth2.getAuthInstance().signIn();
-    history.push("/dashboard")
+    history.push(process.env.PUBLIC_URL + "/dashboard")
   }
 
   function handleSignoutClick(event) {
@@ -26,7 +26,7 @@ function Home() {
           <div className="nav-buttons">
             {window.gapi.auth2.getAuthInstance().isSignedIn.get() ?
               <>
-                <button><Link to="/dashboard">Dashboard</Link></button>
+                <button><Link to={process.env.PUBLIC_URL + "/dashboard"}>Dashboard</Link></button>
                 <button onClick={handleSignoutClick}>Sign Out</button> 
               </>
               :

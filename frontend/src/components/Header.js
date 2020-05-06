@@ -1,12 +1,12 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import {  useHistory } from 'react-router-dom';
 
 function Header() {
   const history = useHistory()
 
   function handleSignoutClick(event) {
     window.gapi.auth2.getAuthInstance().signOut();
-    history.push('/');
+    history.push(process.env.PUBLIC_URL + '/');
     window.location.reload();
   }
 
