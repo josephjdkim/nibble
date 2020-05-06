@@ -21,6 +21,11 @@
   "homepage": "https://github.com/josephjdkim/nibble#readme",
   "dependencies": {
     "concurrently": "^5.2.0",
-    "nodemon": "^2.0.3"
+    "nodemon": "^2.0.3",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "express": "^4.17.1",
+    "moment": "^2.25.3",
+    "pg": "^7.18.2"
   }
 }
