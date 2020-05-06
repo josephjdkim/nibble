@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/nibble/static/css/main.0e581911.chunk.css",
-    "main.js": "/nibble/static/js/main.a85c97e3.chunk.js",
-    "main.js.map": "/nibble/static/js/main.a85c97e3.chunk.js.map",
+    "main.js": "/nibble/static/js/main.1b71708e.chunk.js",
+    "main.js.map": "/nibble/static/js/main.1b71708e.chunk.js.map",
     "runtime-main.js": "/nibble/static/js/runtime-main.72fca969.js",
     "runtime-main.js.map": "/nibble/static/js/runtime-main.72fca969.js.map",
     "static/js/2.0625b6be.chunk.js": "/nibble/static/js/2.0625b6be.chunk.js",
     "static/js/2.0625b6be.chunk.js.map": "/nibble/static/js/2.0625b6be.chunk.js.map",
     "index.html": "/nibble/index.html",
-    "precache-manifest.16d888e670b13c4842adb857925bb874.js": "/nibble/precache-manifest.16d888e670b13c4842adb857925bb874.js",
+    "precache-manifest.3e22428609967879588e68a1a0a66c0f.js": "/nibble/precache-manifest.3e22428609967879588e68a1a0a66c0f.js",
     "service-worker.js": "/nibble/service-worker.js",
     "static/css/main.0e581911.chunk.css.map": "/nibble/static/css/main.0e581911.chunk.css.map",
     "static/js/2.0625b6be.chunk.js.LICENSE.txt": "/nibble/static/js/2.0625b6be.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.72fca969.js",
     "static/js/2.0625b6be.chunk.js",
     "static/css/main.0e581911.chunk.css",
-    "static/js/main.a85c97e3.chunk.js"
+    "static/js/main.1b71708e.chunk.js"
   ]
 }
