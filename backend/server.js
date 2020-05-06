@@ -2,10 +2,11 @@ const express = require('express');
 const http = require('http');
 const cors = require('cors');
 const bodyParser = require('body-parser')
+const path = require('path');
 
 const app = express();
 
-const PORT = 5001;
+const PORT = process.env.PORT || 5001;
 
 const db = require('./queries')
 
@@ -31,6 +32,21 @@ app.put('/updateNotes/:user_id', db.updateNotes);
 
 // app.put('/users/:id', db.updateUser)
 // app.delete('/users/:id', db.deleteUser)
+
+app.use(express.static(path.join(__dirname, './frontend/build')));
+
+//production mode
+if(process.env.NODE_ENV === 'production') {  
+  app.use(express.static(path.join(__dirname, './frontend/build'))); 
+  app.get('*', (req, res) => {    
+    res.sendfile(path.join(__dirname = './frontend/build/index.html'));  
+  })
+}
+
+//build mode
+app.get('*', (req, res) => {  
+  res.sendFile(path.join(__dirname+'./frontend/build/index.html'));
+})
 
 console.log("\x1b[36m%s\x1b[0m", `Hosting on PORT=${PORT}`);
 app.listen(PORT);
