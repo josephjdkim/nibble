@@ -69,8 +69,8 @@ function App() {
       <>
         <Router>
           <Switch>
-            <Route exact path={process.env.PUBLIC_URL + '/'} children={<Home />} />
-            <Route exact path={process.env.PUBLIC_URL + "/dashboard"} children={<Dashboard />} />
+            <Route exact path={'/'} children={<Home />} />
+            <Route exact path={"/dashboard"} children={<Dashboard />} />
           </Switch>
         </Router>
 

@@ -7,7 +7,7 @@ import axios from 'axios';
 import './TaskCardBlock.css';
 
 function TaskCardBlock() {
-  const apiServer = 'http://localhost:5001/';
+  const apiServer = process.env.NODE_ENV === 'production' ? 'https://nibble-productivity.herokuapp.com/' : 'http://localhost:5001/';
 
   const initialState = {
     data: null,

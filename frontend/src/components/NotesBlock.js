@@ -5,7 +5,7 @@ import axios from 'axios';
 import './NotesBlock.css';
 
 function NotesBlock() {
-  const apiServer = 'http://localhost:5001/';
+  const apiServer = process.env.NODE_ENV === 'production' ? 'https://nibble-productivity.herokuapp.com/' : 'http://localhost:5001/';
   const [payload, setPayload] = useState({});
 
   async function onInputChange(event) {

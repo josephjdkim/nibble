@@ -18,7 +18,7 @@ const customStyles = {
  
 function CreateTaskButton({updateTasks}){
   var subtitle;
-  const apiServer = 'http://localhost:5001/'
+  const apiServer = process.env.NODE_ENV === 'production' ? 'https://nibble-productivity.herokuapp.com/' : 'http://localhost:5001/';
   const [modalIsOpen,setIsOpen] = useState(false);
   const initialPayload = {
     title: '',

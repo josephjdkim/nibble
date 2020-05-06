@@ -3,7 +3,7 @@ import axios from 'axios';
 import moment from 'moment';
 
 function TaskCard({task, updateTasks}) {
-  const apiServer = 'http://localhost:5001/'
+  const apiServer = process.env.NODE_ENV === 'production' ? 'https://nibble-productivity.herokuapp.com/' : 'http://localhost:5001/';
   const [showTaskInfo, handleTaskInfo] = useState(false);
   const [payload, setPayload] = useState({...task})
   const [timeStarted, setTimeStarted] = useState(false)
