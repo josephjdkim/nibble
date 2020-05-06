@@ -20,20 +20,43 @@ function CalendarCard({task, updateTasks}) {
     const route = event.target.name+"Task";
     console.log(route);
     console.log(payload);
+    // newPayload = {...payload}
+    payload['userID'] = userID
+    setPayload(payload);
+    console.log(route.slice(0, route.length-4) == "update");
+    if (route.slice(0, route.length-4) == "update") {
+      await axios.put(`${apiServer}${route}/${userID}`, JSON.stringify(payload), {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+    } else if (route.slice(0, route.length-4) == "delete") {
+      await axios.delete(`${apiServer}${route}/${userID}`, JSON.stringify(payload), {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+    }
+    updateTasks();
+  }
+
+  async function handleTaskDelete(event) {
+    console.log(payload)
+    event.preventDefault();
+    const route = event.target.name+"Task";
+    console.log(route);
+    console.log(payload);
+    // newPayload = {...payload}
     payload['userID'] = userID
     setPayload(payload);
     console.log(payload);
-    await axios.post(`${apiServer}${route}`, JSON.stringify(payload), {
+    await axios.delete(`${apiServer}deleteTask/${userID}`, JSON.stringify(payload), {
       headers: {
         'Content-Type': 'application/json',
       }
     })
     updateTasks();
-  }
-
-  async function handleTaskDelete(event) {
-    event.preventDefault();
-    console.log(payload)
+    handleTaskInfo(!showTaskInfo);
   }
 
   function handleInputChange(event) {
@@ -43,7 +66,7 @@ function CalendarCard({task, updateTasks}) {
     let newPayload = {...payload}
     newPayload[name] = value;
     setPayload(newPayload);
-    console.log(newPayload);
+    // console.log(newPayload);
   }
 
   return(
