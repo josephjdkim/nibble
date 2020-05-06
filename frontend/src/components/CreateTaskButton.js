@@ -22,6 +22,9 @@ function CreateTaskButton({updateTasks}){
   const [modalIsOpen,setIsOpen] = useState(false);
   const [payload, setPayload] = useState({});
 
+  const showError = false;
+  const errorMsg = '';
+
   function openModal() {
     setIsOpen(true);
   }
@@ -62,10 +65,13 @@ function CreateTaskButton({updateTasks}){
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         style={customStyles}
-        contentLabel="Example Modal"
+        contentLabel="Example Modal" // change name of this?
       >
         {/* <button onClick={closeModal}>close</button> */}
         <div className="block uppercase tracking-wide text-gray-900 text-xl font-bold mb-2">Create Task</div>
+        { showError &&
+          <div className="taskSubmitError">${errorMsg}</div>
+        }
         <form onSubmit={handleSubmit}>
           <div className="flex flex-wrap -mx-3 mb-6">
             <div className="w-full px-3 mb-6 md:mb-0">
@@ -82,13 +88,14 @@ function CreateTaskButton({updateTasks}){
             </div>
             <div className="w-1/4 px-3 mb-6 md:mb-0">
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-                Estimated Time
+                Est. Time (min)
               </label>
               <input name="estimatedTime" onChange={handleInputChange} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-first-name" type="text" />
             </div>
           </div>
           <input type="submit" value="Submit" onChange={handleInputChange} className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded"/>
         </form>
+
       </Modal>
     </div>
   );

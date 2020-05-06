@@ -36,7 +36,8 @@ const getTaskById = (request, response) => {
 }
 
 const createTask = (request, response) => {
-  const { title, estimatedTime, category, userID } = request.body
+  const { title, estimatedTime, category, userID } = request.body;
+  const user_id = request.params.user_id;
   pool.query('INSERT INTO tasks (title, estimated_time, category, user_id) VALUES ($1, $2, $3, $4)', [title, estimatedTime, category, userID], (error, results) => {
     if (error) {
       throw error
@@ -45,20 +46,43 @@ const createTask = (request, response) => {
   })
 }
 
-const createUser = (request, response) => {
-  const { userID, first_name, last_name, email, username, pw } = request.body
-  pwHashed = crypto.createHash('sha256').update(pw+config.secret.salt).digest('hex');
-  console.log(pwHashed)
-  pool.query(
-    'INSERT INTO nibble_users (user_id, first_name, last_name, email, username, password) VALUES ($1, $2, $3, $4, $5, $6',
-     [userID, first_name, last_name, email, username, pwHashed],
-     (error, results) => {
-      if (error) {
-        throw error
-      }
-      response.status(201).send(`Successfully created user ${username}. Welcome, ${first_name}!`)
-     })
+const deleteTask = (request, response) => {
+  const { id, title } = request.body;
+  const user_id = request.params.user_id;
+  pool.query('DELETE FROM tasks WHERE user_id=$1 and id=$2', [userID, id], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).send(`Removed task ${title} with id ${id}`)
+  })
 }
+
+const updateTask = (request, response) => {
+  const { title, estimated_time, category, userID, id} = request.body;
+  pool.query(
+    'UPDATE tasks SET title=$1, estimated_time=$2, category=$3 WHERE user_id=$4', 
+    [title, estimated_time, category, userID],
+    (error, results) => {
+      if (error)
+        throw error
+      response.status(200).send(`Updated user ${userID} with fields ${{title, estimated_time, category, userID}}`)
+  })
+}
+
+// const createUser = (request, response) => {
+//   const { userID, first_name, last_name, email, username, pw } = request.body
+//   pwHashed = crypto.createHash('sha256').update(pw+config.secret.salt).digest('hex');
+//   console.log(pwHashed)
+//   pool.query(
+//     'INSERT INTO nibble_users (user_id, first_name, last_name, email, username, password) VALUES ($1, $2, $3, $4, $5, $6',
+//      [userID, first_name, last_name, email, username, pwHashed],
+//      (error, results) => {
+//       if (error) {
+//         throw error
+//       }
+//       response.status(201).send(`Successfully created user ${username}. Welcome, ${first_name}!`)
+//      })
+// }
 
 const getNotes = (request, response) => {
   const user_id = request.params.user_id
@@ -103,6 +127,8 @@ module.exports = {
   getTasks,
   getTaskById,
   createTask,
+  updateTask,
+  deleteTask,
   getNotes,
   updateNotes
 }
