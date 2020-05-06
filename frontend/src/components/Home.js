@@ -48,7 +48,7 @@ function Home() {
             a user dashboard to plan out your tasks daily and increase
             your productivity!
           </div>
-          <button className="green-button">
+          <button className="green-button" onClick={handleAuthClick}>
             Get Started Today!
           </button>
         </div>
@@ -96,7 +96,7 @@ function Home() {
         </div>
         <div className="bottom-text">
           Start Nibbling Through Your Work!
-          <button className="green-button">Get Started Today!</button>
+          <button className="green-button" onClick={handleAuthClick}>Get Started Today!</button>
         </div>
       </div>
       <footer>
