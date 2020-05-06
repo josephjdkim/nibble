@@ -49,7 +49,8 @@ const createTask = (request, response) => {
 const deleteTask = (request, response) => {
   const { id, title, category } = request.body;
   const userID = request.params.user_id;
-  console.log(`Deleting task from user ${userID}`)
+  console.log(request.body)
+  console.log(`Deleting task from user ${userID} with id ${id}`)
   pool.query('DELETE FROM tasks WHERE user_id=$1 and id=$2 and title=$3 and category=$4',
     [userID, id, title, category], (error, results) => {
       if (error) {
@@ -64,7 +65,7 @@ const updateTask = (request, response) => {
   const userID = request.params.user_id;
   console.log(`Updating user ${userID} who has task ${id}`)
   pool.query(
-    'UPDATE tasks SET title=$1, estimated_time=$2, category=$3 WHERE user_id=$4 and id=$5', 
+    'UPDATE tasks SET title=$1, estimated_time=$2, category=$3 WHERE user_id=$4 and id=$5',
     [title, estimated_time, category, userID, id],
     (error, results) => {
       if (error)
