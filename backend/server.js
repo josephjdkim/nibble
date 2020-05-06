@@ -23,6 +23,7 @@ app.get('/getTasks/:user_id', db.getTasks);
 app.get('/tasks/:id', db.getTaskById);
 app.post('/createTask', db.createTask);
 app.put('/updateTask/:user_id', db.updateTask);
+app.put('/startTask/:task_id', db.updateTask);
 app.delete('/deleteTask/:user_id', db.deleteTask);
 app.get('/getNotes/:user_id', db.getNotes);
 app.put('/updateNotes/:user_id', db.updateNotes);
