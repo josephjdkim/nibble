@@ -83,9 +83,9 @@ function TaskCard({task, updateTasks}) {
   }
 
   return(
-    <div className="max-w-sm w-full bg-white lg:max-w-full mb-4">
+    <div className="max-w-sm w-full rounded-lg bg-white lg:max-w-full mb-4 shadow-lg">
       <div
-        className="border border-white rounded-md shadow-lg p-4 flex flex-col justify-between leading-normal"
+        className="p-4 flex flex-col justify-between leading-normal"
         onClick={() => handleTaskInfo(!showTaskInfo)}
       >
         <div className="my-2 flex items-center">
