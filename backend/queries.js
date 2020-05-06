@@ -4,11 +4,11 @@ const config = require('../config')[env];
 const moment = require('moment');
 
 const pool = new Pool({
-  user: config.database.user,
-  host: config.database.host,
-  database: config.database.db,
-  password: config.database.pw,
-  port: config.database.port
+  user: process.env.USER || config.database.user,
+  host: process.env.HOST || config.database.host,
+  database: process.env.DB || config.database.db,
+  password: process.env.PW || config.database.pw,
+  port: process.env.PORT || config.database.port
 })
 
 const crypto = require('crypto');
