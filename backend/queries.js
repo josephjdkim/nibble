@@ -1,6 +1,9 @@
 const Pool = require('pg').Pool;
 const env = process.env.NODE_ENV || 'development';
-const config = require('../config')[env];
+const config;
+if (process.env.NODE_ENV !== 'production') {
+  config = require('../config')[env];
+}
 const moment = require('moment');
 
 const pool = new Pool({
