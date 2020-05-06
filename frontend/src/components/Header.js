@@ -1,24 +1,20 @@
 import React from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
 function Header() {
-
-  function handleAuthClick(event) {
-    console.log(window.gapi.auth2.getAuthInstance());
-    window.gapi.auth2.getAuthInstance().signIn();
-  }
+  const history = useHistory()
 
   function handleSignoutClick(event) {
     window.gapi.auth2.getAuthInstance().signOut();
+    history.push('/');
+    window.location.reload();
   }
 
   return (
     <div className="flex justify-between items-center px-5">
-      <img src="logo on white.svg" className="h-20 mb-4"/>
+      <img src="logo on white.svg" className="h-20 mb-4 w-auto"/>
       <div className="flex">
-        {window.gapi.auth2.getAuthInstance().isSignedIn.get() ?
-          <button onClick={handleSignoutClick}>Sign Out</button> :
-          <button onClick={handleAuthClick}>Authorize</button>
-        }
+        <button onClick={handleSignoutClick}>Sign Out</button>
       </div>
     </div>
   );

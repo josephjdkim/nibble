@@ -1,19 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import moment from 'moment';
 
-function CalendarCard({task, updateTasks}) {
-  // const initialState = {
-  //   task,
-  //   showTaskInfo: false
-  // };
+function TaskCard({task, updateTasks}) {
   const apiServer = 'http://localhost:5001/'
-
   const [showTaskInfo, handleTaskInfo] = useState(false);
 
   const [payload, setPayload] = useState({...task})
 
-
+  const currentTime = moment().utc();
+  const startedTime = moment(task.time_started);
+  const timeDiff = moment.utc(moment(currentTime,"DD/MM/YYYY HH:mm:ss").diff(moment(startedTime,"DD/MM/YYYY HH:mm:ss")));
+  const [timeElapsed, setTimeElapsed] = useState(timeDiff);
   const userID = window.gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile().getId();
+  
+  useEffect(() => {
+    if (task.time_started) {
+      const interval = setInterval(() => {
+        setTimeElapsed(timeElapsed => moment(timeElapsed).add(1, 'seconds'));
+      }, 1000);
+
+      return () => {
+        clearInterval(interval);
+      };
+    }
+  }, [])
 
   async function handleTaskUpdate(event) {
     event.preventDefault();
@@ -48,6 +59,7 @@ function CalendarCard({task, updateTasks}) {
 
   return(
     <div className="max-w-sm w-full bg-white lg:max-w-full mb-4">
+      <div>{task.time_started ? timeElapsed.format("HH:mm:ss") : null}</div>
       <div
         className="border border-white rounded-md shadow-lg p-4 flex flex-col justify-between leading-normal"
         onClick={() => handleTaskInfo(!showTaskInfo)}
@@ -129,4 +141,4 @@ function CalendarCard({task, updateTasks}) {
   )
 }
 
-export default CalendarCard;
+export default TaskCard;

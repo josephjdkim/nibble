@@ -1,0 +1,26 @@
+{
+  "name": "nibble",
+  "version": "1.0.0",
+  "description": "Nibble is a productivity and task management tool meant to help users tackle  their responsibilities in an easily-digestible way.",
+  "main": "config.js",
+  "scripts": {
+    "start": "node server.js --prefix backend",
+    "server": "nodemon server.js --prefix backend",
+    "client": "npm run start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josephjdkim/nibble.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josephjdkim/nibble/issues"
+  },
+  "homepage": "https://github.com/josephjdkim/nibble#readme",
+  "dependencies": {
+    "concurrently": "^5.2.0",
+    "nodemon": "^2.0.3"
+  }
+}
