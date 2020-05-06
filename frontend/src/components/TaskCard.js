@@ -95,11 +95,6 @@ function TaskCard({task, updateTasks}) {
             {task.time_started ? `${timeElapsed.format("HH:mm:ss")} / `: null} 
             {moment.utc().hours(Math.floor(task.estimated_time/60)).minutes(Math.floor(task.estimated_time%60)).seconds(0).format("HH:mm:ss")}
           </div>
-          <input
-            type="button"
-            value="Start!"
-            className="bg-green-300 hover:bg-green-400 rounded p-2"
-          />
         </div>
       </div>
       {
