@@ -93,7 +93,7 @@ function CreateTaskButton({updateTasks}){
               <input name="estimatedTime" onChange={handleInputChange} className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-first-name" type="text" />
             </div>
           </div>
-          <input type="submit" value="Submit" onChange={handleInputChange} className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded"/>
+          <input type="submit" value="Create" onChange={handleInputChange} className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded"/>
         </form>
 
       </Modal>
