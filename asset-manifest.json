@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/nibble/static/css/main.a8ae86ba.chunk.css",
-    "main.js": "/nibble/static/js/main.9c963437.chunk.js",
-    "main.js.map": "/nibble/static/js/main.9c963437.chunk.js.map",
+    "main.css": "/nibble/static/css/main.0e581911.chunk.css",
+    "main.js": "/nibble/static/js/main.a85c97e3.chunk.js",
+    "main.js.map": "/nibble/static/js/main.a85c97e3.chunk.js.map",
     "runtime-main.js": "/nibble/static/js/runtime-main.72fca969.js",
     "runtime-main.js.map": "/nibble/static/js/runtime-main.72fca969.js.map",
-    "static/js/2.56574d59.chunk.js": "/nibble/static/js/2.56574d59.chunk.js",
-    "static/js/2.56574d59.chunk.js.map": "/nibble/static/js/2.56574d59.chunk.js.map",
+    "static/js/2.0625b6be.chunk.js": "/nibble/static/js/2.0625b6be.chunk.js",
+    "static/js/2.0625b6be.chunk.js.map": "/nibble/static/js/2.0625b6be.chunk.js.map",
     "index.html": "/nibble/index.html",
-    "precache-manifest.78338a5b262593f00bcaaceebdfb113b.js": "/nibble/precache-manifest.78338a5b262593f00bcaaceebdfb113b.js",
+    "precache-manifest.16d888e670b13c4842adb857925bb874.js": "/nibble/precache-manifest.16d888e670b13c4842adb857925bb874.js",
     "service-worker.js": "/nibble/service-worker.js",
-    "static/css/main.a8ae86ba.chunk.css.map": "/nibble/static/css/main.a8ae86ba.chunk.css.map",
-    "static/js/2.56574d59.chunk.js.LICENSE.txt": "/nibble/static/js/2.56574d59.chunk.js.LICENSE.txt"
+    "static/css/main.0e581911.chunk.css.map": "/nibble/static/css/main.0e581911.chunk.css.map",
+    "static/js/2.0625b6be.chunk.js.LICENSE.txt": "/nibble/static/js/2.0625b6be.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.72fca969.js",
-    "static/js/2.56574d59.chunk.js",
-    "static/css/main.a8ae86ba.chunk.css",
-    "static/js/main.9c963437.chunk.js"
+    "static/js/2.0625b6be.chunk.js",
+    "static/css/main.0e581911.chunk.css",
+    "static/js/main.a85c97e3.chunk.js"
   ]
 }
