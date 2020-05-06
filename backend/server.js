@@ -22,8 +22,11 @@ app.get("/", (req, res) => res.send('hello'))
 app.get('/getTasks/:user_id', db.getTasks);
 app.get('/tasks/:id', db.getTaskById);
 app.post('/createTask', db.createTask);
+app.put('/updateTask/:user_id', db.updateTask);
+app.delete('/deleteTask/:user_id', db.deleteTask);
 app.get('/getNotes/:user_id', db.getNotes);
 app.put('/updateNotes/:user_id', db.updateNotes);
+
 // app.put('/users/:id', db.updateUser)
 // app.delete('/users/:id', db.deleteUser)
 

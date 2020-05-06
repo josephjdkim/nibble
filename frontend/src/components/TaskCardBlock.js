@@ -54,6 +54,10 @@ function TaskCardBlock() {
     loadTasks();
   }, [])
 
+  // let showTaskInfo = false;
+  // const handleTaskInfo = () => {
+  //   showTaskInfo = !showTaskInfo;
+  // }
   return (
     <div className="container w-2/5 taskTheme">
       <div className="container flex items-center justify-between">
@@ -62,7 +66,7 @@ function TaskCardBlock() {
       </div>
       <div className="shadow-inner p-4 rounded-md overflow-y-scroll" style={{height: "76vh"}}>
         {state.loaded ? state.data.map(cur => {
-          return <TaskCard key={cur.id} task={cur}/>
+          return <TaskCard key={cur.id} task={cur} updateTasks={loadTasks}/>
         }) : null}
       </div>
     </div>

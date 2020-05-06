@@ -80,7 +80,7 @@ function ScheduleCardBlock() {
   return (
     <div className="container w-1/3 schedTheme">
       <HeaderText title="Schedule"/>
-      <div className="shadow-inner p-4 rounded-md overflow-y-scroll schedBody" style={{height: "76vh"}}>
+      <div className="p-6 rounded-md overflow-y-hidden schedBody" style={{height: "76vh"}}>
         {state.loaded ? state.data.result.items.map(cur => {
           return <ScheduleCard key={cur.id} event={cur}/>
         }) : null}
