@@ -7,15 +7,18 @@ if (process.env.NODE_ENV !== 'production') {
 }
 const moment = require('moment');
 
-
-
+const connectionString = process.env.DB_URL || config.database.url;
 const pool = new Pool({
-  user: process.env.USER || config.database.user,
-  host: process.env.HOST || config.database.host,
-  database: process.env.DB || config.database.db,
-  password: process.env.PW || config.database.pw,
-  port: process.env.PORT || config.database.port
+  connectionString: connectionString,
 })
+
+// const pool = new Pool({
+//   user: process.env.USER || config.database.user,
+//   host: process.env.HOST || config.database.host,
+//   database: process.env.DB || config.database.db,
+//   password: process.env.PW || config.database.pw,
+//   port: process.env.PORT || config.database.port
+// })
 
 const crypto = require('crypto');
 
