@@ -12,7 +12,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "moment": "^2.25.3",
     "pg": "^7.18.2"
   }
